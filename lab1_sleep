@@ -1,0 +1,16 @@
+// 用来实现 6.S081 的第一个实验 sleep
+#include "kernel/types.h"                                                   
+#include "user/user.h"
+
+int main(int argc, char *argv[]){
+
+    if (argc<2){
+        fprintf(2, "Please input sleep time:\n");
+        exit(1);
+    }
+   int number = atoi(argv[1]);
+  
+   sleep(number);
+   exit(0);
+}
+
