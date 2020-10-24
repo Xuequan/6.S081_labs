@@ -1,0 +1,25 @@
+// 用来实现第二个实验 
+#include "kernel/types.h"
+#include "user/user.h"
+
+int main(){
+    int fds1[2];
+    int pid;
+    char buf[64];
+    pipe(fds1);
+    pid = fork();
+    if (pid<0)
+    {
+        fprintf(2,"Fork error!\n");
+        exit(1);
+    }else if(pid >0){
+        write(fds1[1],"this is to child]\n",17);
+       // fprintf(1,"%d :received pong\n", getpid());
+        printf("%d : received pong\n", getpid());
+    }else if (pid==0){
+        read(fds1[0],buf,sizeof(buf));
+      //  fprintf(1,"%d : received ping\n",pid);
+        printf("%d : received ping\n", getpid());
+    }
+    exit(0);
+}
